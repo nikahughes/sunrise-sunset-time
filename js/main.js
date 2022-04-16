@@ -19,6 +19,7 @@ function getTime(){
         let lat = data.latitude;
         let long = data.longitude;
         let date = document.querySelector('input').value
+        document.querySelector('#location').innerText = `Location: ${data.region_name}, ${data.country_name}`
 
         fetch(`http://worldtimeapi.org/api/ip`)
           .then(res => res.json())
@@ -30,6 +31,7 @@ function getTime(){
           .then(res => res.json())
           .then(data => {
             console.log(data)
+            
             if(daySavingTime){
               document.querySelector('#sunrise').innerText = `Sunrise: ${convertToDaySavingTime(data.results.sunrise)}`
               document.querySelector('#sunset').innerText = `Sunset: ${convertToDaySavingTime(data.results.sunset)}`
