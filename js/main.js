@@ -1,4 +1,4 @@
-//Example fetch using pokemonapi.co
+
 
 document.querySelector('button').addEventListener('click', getTime)
 
@@ -12,22 +12,24 @@ function convertToDaySavingTime(str){
 
 function getTime(){
   
-  fetch(`http://api.ipstack.com/2607:fb90:6087:6071:8c84:5dd4:fc99:541c?access_key=e90332557c688db469e2737b8bd4c473`)
-      .then(res => res.json())
-      .then(data => {
-        console.log(data)
-        let lat = data.latitude;
-        let long = data.longitude;
-        let date = document.querySelector('input').value
-        document.querySelector('#location').innerText = `Location: ${data.region_name}, ${data.country_name}`
+  fetch(`https://ipapi.co/json/`)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+     let lat = data.latitude;
+      let long = data.longitude;
+      let date = document.querySelector('input').value
+      document.querySelector('#location').innerText = `Location: ${data.city}, ${data.country_name}`
 
-        fetch(`http://worldtimeapi.org/api/ip`)
+   
+
+        fetch(`https://worldtimeapi.org/api/ip`)
           .then(res => res.json())
           .then(data => {
           console.log(data)
           let daySavingTime = data.dst;
         
-          fetch(`https://api.sunrise-sunset.org/json?lat=${lat}&${long}&date=${date}`)
+          fetch(`https://cors-anywhere.herokuapp.com/http://api.sunrise-sunset.org/json?lat=${lat}&${long}&date=${date}`)
           .then(res => res.json())
           .then(data => {
             console.log(data)
